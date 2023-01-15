@@ -13,10 +13,14 @@ function updateCaseNumber(isIncrease) {
 
     let newCaseNumber;
 
-    if (isIncrease === true) {
+    if (isIncrease) {
         newCaseNumber = previsousCaseNumber + 1;
     }
     else {
+        if (previsousCaseNumber < 1) {
+            alert('Quantity cannot be negative');
+            return previsousCaseNumber;
+        }
         newCaseNumber = previsousCaseNumber - 1;
     }
 
@@ -33,12 +37,13 @@ function updateCaseTotalPrice(newCaseNumber, individualPrice) {
 
 document.getElementById('btn-case-plus').addEventListener('click', function () {
     const newCaseNumber = updateCaseNumber(true);
-
     updateCaseTotalPrice(newCaseNumber, 59);
+    calcualteTotal();
 });
 
 document.getElementById('btn-case-minus').addEventListener('click', function () {
     const newCaseNumber = updateCaseNumber(false);
     updateCaseTotalPrice(newCaseNumber, 59);
+    calcualteTotal();
 });
 
