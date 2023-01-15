@@ -1,18 +1,28 @@
-const getValueById = id => {
+// added from browser
+const getTextElementValueById = id => {
     const element = document.getElementById(id);
     const elementString = element.innerText;
     const elementValue = parseFloat(elementString);
     return elementValue;
 }
 
+const setTextElementValueById = (id, value) => {
+    const element = document.getElementById(id);
+    element.innerText = value;
+    return;
+}
+
 const calcualteTotal = () => {
-    const phoneTotal = getValueById('phone-total');
-    const caseTotal = getValueById('case-total');
+    const phoneTotal = getTextElementValueById('phone-total');
+    const caseTotal = getTextElementValueById('case-total');
+
     const newSubTotal = phoneTotal + caseTotal;
-    const previousSubTotal = document.getElementById('sub-total');
-    previousSubTotal.innerText = newSubTotal.toFixed(2);
-    const taxAmount = document.getElementById('tax-amout');
-    taxAmount.innerText = (newSubTotal * 0.1).toFixed(2);
-    const totalAmount = document.getElementById('total-amount');
-    totalAmount.innerText = (newSubTotal * 1.1).toFixed(2);
+
+    const taxAmount = newSubTotal * 0.1;
+
+    const totalAmount = newSubTotal + taxAmount;
+
+    setTextElementValueById('sub-total', newSubTotal.toFixed(2));
+    setTextElementValueById('tax-amout', taxAmount.toFixed(2));
+    setTextElementValueById('total-amount', totalAmount.toFixed(2));
 }
